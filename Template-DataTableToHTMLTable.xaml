@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Template_DataTableToHTMLTable" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1069,1908" sap2010:WorkflowViewState.IdRef="Template_DataTableToHTMLTable_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Template_DataTableToHTMLTable" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1069,2108" sap2010:WorkflowViewState.IdRef="Template_DataTableToHTMLTable_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="44">
+    <scg:List x:TypeArguments="x:String" Capacity="23">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -27,7 +27,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="32">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="21">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -51,12 +51,15 @@
       <AssemblyReference>UiPath.CV</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Template_DataTableToHTMLTable" sap:VirtualizedContainerService.HintSize="474,1743" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Template_DataTableToHTMLTable" sap:VirtualizedContainerService.HintSize="474,1943" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="thHTML" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt" />
       <Variable x:TypeArguments="x:String" Name="tableHTML" />
       <Variable x:TypeArguments="x:String" Name="tdHTML" />
+      <Variable x:TypeArguments="x:String" Name="tableStyle" />
+      <Variable x:TypeArguments="x:String" Name="thStyle" />
+      <Variable x:TypeArguments="x:String" Name="tdStyle" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -70,6 +73,36 @@
         </InArgument>
       </ui:ReadRange.Range>
     </ui:ReadRange>
+    <ui:MultipleAssign DisplayName="Multiple Assign Set Table Style" sap:VirtualizedContainerService.HintSize="432,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[tableStyle]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">border:0px solid black; border-spacing:0px; padding:0px; width:0px;</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[thStyle]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">border:1px solid black; border-collapse:collapse; windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[tdStyle]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">border:1px solid black;</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
     <Assign DisplayName="Assign init thHTML" sap:VirtualizedContainerService.HintSize="432,60" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[thHTML]</OutArgument>
@@ -90,12 +123,12 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Assign DisplayName="Assign th Data" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign DisplayName="Assign th" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[thHTML]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[thHTML+String.Format("&lt;th style='border:1px solid black; border-collapse:collapse; windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;'&gt;{0}&lt;/th&gt;", column.ColumnName)]</InArgument>
+                <InArgument x:TypeArguments="x:String">[thHTML+String.Format("&lt;th style='"+thStyle+"'&gt;{0}&lt;/th&gt;", column.ColumnName)]</InArgument>
               </Assign.Value>
             </Assign>
           </Sequence>
@@ -122,7 +155,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Assign DisplayName="Assign init tdHTML" sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+            <Assign DisplayName="Assign init tr tdHTML" sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="Assign_4">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[tdHTML]</OutArgument>
               </Assign.To>
@@ -142,19 +175,19 @@
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Assign DisplayName="Assign tdData" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                    <Assign DisplayName="Assign td" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_5">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:String">[tdHTML]</OutArgument>
                       </Assign.To>
                       <Assign.Value>
-                        <InArgument x:TypeArguments="x:String">[tdHTML+String.Format("&lt;td style='border:1px solid black;'&gt;&lt;p&gt;{0}&lt;/p&gt;&lt;/td&gt;",row(column.ColumnName))]</InArgument>
+                        <InArgument x:TypeArguments="x:String">[tdHTML+String.Format("&lt;td style='"+tdStyle+"'&gt;&lt;p&gt;{0}&lt;/p&gt;&lt;/td&gt;",row(column.ColumnName))]</InArgument>
                       </Assign.Value>
                     </Assign>
                   </Sequence>
                 </ActivityAction>
               </ui:ForEach.Body>
             </ui:ForEach>
-            <Assign DisplayName="Assign End tr" sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+            <Assign DisplayName="Assign End tr tdHTML" sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="Assign_6">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[tdHTML]</OutArgument>
               </Assign.To>
@@ -171,9 +204,9 @@
         <OutArgument x:TypeArguments="x:String">[tableHTML]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">["&lt;table border=0 cellspacing=0 cellpadding=0 width=0&gt;"+thHTML+tdHTML+"&lt;/table&gt;"]</InArgument>
+        <InArgument x:TypeArguments="x:String">["&lt;table style='"+tableStyle+"'&gt;"+thHTML+tdHTML+"&lt;/table&gt;"]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:WriteTextFile DisplayName="Write Text File" FileName="제목 없음.html" sap:VirtualizedContainerService.HintSize="432,132" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[tableHTML]" />
+    <ui:WriteTextFile DisplayName="Write Text File" FileName="UnTitled.html" sap:VirtualizedContainerService.HintSize="432,132" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[tableHTML]" />
   </Sequence>
 </Activity>
